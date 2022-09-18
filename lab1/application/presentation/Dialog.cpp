@@ -62,7 +62,6 @@ void Dialog::help() {
     std::cout << "        Show y(anlge)" << std::endl;
     std::cout << "6.   yx 0.5" << std::endl;
     std::cout << "        Show y(x)" << std::endl;
-    std::cout << "7.   print" << std::endl;
     std::cout << std::endl;
 }
 

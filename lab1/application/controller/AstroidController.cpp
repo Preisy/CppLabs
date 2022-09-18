@@ -135,8 +135,12 @@ Response Controllers::AstroidController::yx(const std::string & args) {
         return {"", ResponseCode::BadRequest};
     }
 
-    double res = astroid.getYfromX(value);
-    return {std::to_string(res), Ok};
+    try {
+        double res = astroid.getYfromX(value);
+        return {std::to_string(res), Ok};
+    } catch (std::exception &) {
+        return {"", ResponseCode::BadRequest};
+    }
 }
 
 

@@ -1,5 +1,6 @@
 #include "Astroid.h"
 #include <math.h>
+#include <stdexcept>
 
 namespace Models {
 
@@ -42,8 +43,12 @@ namespace Models {
     }
 
     double Astroid::getYfromX(double x) {
-        if (abs(x) > R) return 0;
-        double angle = acos(pow(x / R, (double)1 / 3));
+        if (abs(x) > R) throw std::invalid_argument("out of scope");
+        double angle = 0;
+        if (x < 0)
+            angle = acos(pow(-x / R, (double) 1 / 3));
+        else
+            angle = acos(pow(x / R, (double) 1 / 3));
         return R * pow(sin(angle), 3);
     }
 
