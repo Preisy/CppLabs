@@ -47,9 +47,12 @@ namespace Models {
         double angle = 0;
         if (x < 0)
             angle = acos(pow(-x / R, (double) 1 / 3));
+        else if (x == 0)
+            angle = M_PI;
         else
             angle = acos(pow(x / R, (double) 1 / 3));
         return R * pow(sin(angle), 3);
     }
+
 
 }
