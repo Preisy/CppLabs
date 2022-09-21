@@ -9,8 +9,10 @@ TEST_CASE( "Astroid coords are computed", "[astroid]" ) {
     Models::Astroid astroid;
 
     SECTION("Astroid::x") {
+        astroid.setR(24);
         REQUIRE( astroid.x(0) == astroid.getR() );
-        REQUIRE( astroid.x(M_PI) == 0);
+        REQUIRE( astroid.x(M_PI) == -astroid.getR());
+        REQUIRE( astroid.x(4 * M_PI) == astroid.getR());
     }
 
     SECTION("Astroid::y") {
@@ -19,8 +21,11 @@ TEST_CASE( "Astroid coords are computed", "[astroid]" ) {
     }
 
     SECTION("Astroid::yx") {
+        astroid.setR(24);
+
         REQUIRE(astroid.getYfromX(0) == astroid.getR());
-        REQUIRE(astroid.getYfromX(astroid.getR()) == astroid.getR());
+        REQUIRE(astroid.getYfromX(astroid.getR()) == 0);
+        REQUIRE(astroid.getYfromX(-astroid.getR()) == 0);
     }
 }
 
@@ -33,6 +38,12 @@ TEST_CASE("Calculate properties", "[astroid]" ) {
 
     SECTION("Astroid::s") {
         REQUIRE( astroid.square() == 0 );
+    }
+
+    SECTION("Astroid::cr") {
+        REQUIRE( astroid.curvatureRadius(0) == 0 );
+        astroid.setR(24);
+        REQUIRE( astroid.curvatureRadius(M_PI_4) == 36 );
     }
 }
 
