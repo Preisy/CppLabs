@@ -1,14 +1,14 @@
 #include "Builder.h"
-#include "AstroidController.h"
+#include "MatrixController.h"
 #include "Dialog.h"
 
 #include "memory"
-#include <iostream>
+
 
 
 int main() {
     Builder builder;
-    auto mc = std::make_unique<Controllers::AstroidController>(Controllers::AstroidController());
+    auto mc = std::make_unique<Controllers::MatrixController>(Controllers::MatrixController());
     builder.addController(std::move(mc));
 
 //    builder.useSessionLogging(std::ofstream("../../log.txt"));

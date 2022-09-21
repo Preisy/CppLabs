@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(builder)
 add_subdirectory(application)
+add_subdirectory(testes)
 
 add_executable(test test.cpp)
 

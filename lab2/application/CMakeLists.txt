@@ -10,7 +10,7 @@ include_directories(controller)
 include_directories(presentation)
 
 
-set(SOURCES_API controller/MatrixController.cpp)
+set(SOURCES_API controller/AstroidController.cpp model/Astroid.cpp)
 set(SOURCES_PR presentation/Dialog.cpp)
 
 add_executable(startup startup.cpp ${SOURCES_API} ${SOURCES_PR})
