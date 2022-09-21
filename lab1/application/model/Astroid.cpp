@@ -11,15 +11,14 @@ namespace Models {
     }
 
     void Astroid::setR(double r) {
+        if (r < 0) throw std::invalid_argument("out of scope");
         R = r;
     }
 
     double Astroid::curveLength(double angle) {
         if (angle < 0) angle = -angle;
         double sum = 0;
-        for (int i = 0; i < angle / M_PI_2; ++i) {
-            sum += (double) 3/2 * pow(R, (double) 1/3);
-        }
+        sum += (double) 3/2 * pow(R, (double) 1/3) * ((int) angle / M_PI_2);
         angle = angle - M_PI_2 * (int) (angle / M_PI_2);
         sum += (double) 3/2 * pow(R, (double) 1/3) * (pow(sin(angle), 2));
 
