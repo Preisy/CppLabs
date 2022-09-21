@@ -23,7 +23,7 @@ TEST_CASE( "Astroid coords are computed", "[astroid]" ) {
     }
 
     SECTION("Astroid::yx") {
-        NEAR(astroid.getYfromX(0), 0);
+        REQUIRE(astroid.getYfromX(0) == Approx(0).margin(0.1));
         REQUIRE(astroid.getYfromX(astroid.getR()) == 0);
         REQUIRE(astroid.getYfromX(-astroid.getR()) == 0);
     }

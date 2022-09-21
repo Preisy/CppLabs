@@ -8,5 +8,4 @@ add_subdirectory(builder)
 add_subdirectory(application)
 add_subdirectory(testes)
 
-add_executable(test test.cpp)
 
