@@ -22,6 +22,3 @@ add_executable(startup startup.cpp ${SOURCES_API} ${SOURCES_PR})
 include_directories(../builder)
 target_link_libraries(startup builder)
 
-#add_executable(main main.cpp ${SOURCES_API})
-add_executable(main main.cpp)
-
