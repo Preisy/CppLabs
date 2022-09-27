@@ -13,8 +13,8 @@ public:
 
     LogicalElement(int inputLength, int outputLength);
 
-    LogicalElement(const Vector<Models::InputTerminal> & inputTerminals,
-                   const Vector<Models::OutputTerminal> & outputTerminals);
+    LogicalElement(Vector<Models::InputTerminal> && inputTerminals,
+                   Vector<Models::OutputTerminal> && outputTerminals);
 
     Vector<Models::InputTerminal> & getInputTerminals();
 

@@ -8,10 +8,10 @@ LogicalElement::LogicalElement(int inputLength, int outputLength)
           outputTerminals(Vector<Models::OutputTerminal>(outputLength))  {}
 
 LogicalElement::LogicalElement(
-            const Vector<Models::InputTerminal> & inputTerminals,
-            const Vector<Models::OutputTerminal> & outputTerminals
-        ) : inputTerminals(inputTerminals),
-            outputTerminals(outputTerminals) {}
+            Vector<Models::InputTerminal> && inputTerminals,
+            Vector<Models::OutputTerminal> && outputTerminals
+        ) : inputTerminals(std::move(inputTerminals)),
+            outputTerminals(std::move(outputTerminals)) {}
 
 Vector<Models::InputTerminal> & LogicalElement::getInputTerminals() {
     return inputTerminals;
