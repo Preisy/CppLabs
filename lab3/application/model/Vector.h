@@ -56,6 +56,8 @@ public:
         } catch(...) {
             AllocTraits::deallocate(alloc, arr, list.size());
         }
+        cap = list.size();
+        len = list.size();
     };
 
 //        constexpr ~Vector() {
