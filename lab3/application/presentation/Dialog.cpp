@@ -34,7 +34,10 @@ int Dialog::run() {
             if (!response.getResponse().empty())
                 std::cout << response.getResponse() << std::endl;
         } else {
-            std::cout << "Bad Request" << std::endl;
+            if (!response.getResponse().empty())
+                std::cout << "Bad Request: " << response.getResponse() << std::endl;
+            else
+                std::cout << "Bad Request" << std::endl;
         }
     }
 
@@ -42,26 +45,29 @@ int Dialog::run() {
 
 void Dialog::help() {
     std::cout << "Examples of commands:" << std::endl;
-    std::cout << "0.   help" << std::endl;
-    std::cout << "0.   exit" << std::endl;
-    std::cout << "1.   R" << std::endl;
-    std::cout << "        Show R" << std::endl;
-    std::cout << "1.1. R 3.14" << std::endl;
-    std::cout << "        set R" << std::endl;
-    std::cout << "2.   cl" << std::endl;
-    std::cout << "        Show curve Length" << std::endl;
-    std::cout << "2.1. cl 2.64" << std::endl;
-    std::cout << "        Show curve Length to angle" << std::endl;
-    std::cout << "3.   cr 2.64" << std::endl;
-    std::cout << "        Show curvature radius of angle" << std::endl;
-    std::cout << "4.   s" << std::endl;
-    std::cout << "        Show square" << std::endl;
-    std::cout << "5.   x 3.14" << std::endl;
-    std::cout << "        Show x(angle)" << std::endl;
-    std::cout << "4.   y 3.14" << std::endl;
-    std::cout << "        Show y(anlge)" << std::endl;
-    std::cout << "6.   yx 0.5" << std::endl;
-    std::cout << "        Show y(x)" << std::endl;
+    std::cout << "1.   setiarr signalState numberOfConnections ..." << std::endl;
+    std::cout << "        Set new array of input terminals" << std::endl;
+    std::cout << "        id, signalState and numberOfConnections must be positive integer " << std::endl;
+    std::cout << "1.   setoarr signalState numberOfConnections ..." << std::endl;
+    std::cout << "        Set new array of output terminals" << std::endl;
+    std::cout << "        id, signalState and numberOfConnections must be positive integer " << std::endl;
+    std::cout << "1.   print" << std::endl;
+    std::cout << "        print all terminals" << std::endl;
+    std::cout << "1.   t type id" << std::endl;
+    std::cout << "        get Terminal by id" << std::endl;
+    std::cout << "        type \"o\" means \"output\" " << std::endl;
+    std::cout << "        type \"i\" means \"input\" " << std::endl;
+    std::cout << "        id must be positive integer " << std::endl;
+    std::cout << "1.   t type id signalState numberOfConnections" << std::endl;
+    std::cout << "        set Terminal by id" << std::endl;
+    std::cout << "        type \"o\" means \"output\" " << std::endl;
+    std::cout << "        type \"i\" means \"input\" " << std::endl;
+    std::cout << "        id, signalState and numberOfConnections must be positive integer " << std::endl;
+    std::cout << "1.   addt signalState numberOfConnections" << std::endl;
+    std::cout << "        add newTerminal" << std::endl;
+    std::cout << "        type \"o\" means \"output\" " << std::endl;
+    std::cout << "        type \"i\" means \"input\" " << std::endl;
+
     std::cout << std::endl;
 }
 

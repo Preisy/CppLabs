@@ -10,6 +10,7 @@
 
 class Builder {
     std::vector<std::unique_ptr<IController>> controllers;
+
     std::unordered_map<std::string, std::function<Response(const std::string &)>> requests;
 
     std::ofstream out;

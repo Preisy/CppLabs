@@ -2,6 +2,7 @@
 #include <map>
 #include <functional>
 #include <unordered_map>
+#include <string>
 
 #include "Response.h"
 

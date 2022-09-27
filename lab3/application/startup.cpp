@@ -1,14 +1,15 @@
 #include "Builder.h"
-#include "AstroidController.h"
+#include "TerminalController.h"
 #include "Dialog.h"
 
 #include "memory"
 #include <iostream>
+#include "uniquePtrAllocator.h"
 
 
 int main() {
     Builder builder;
-    auto mc = std::make_unique<Controllers::AstroidController>(Controllers::AstroidController());
+    auto mc = std::make_unique<Controllers::TerminalController>(Controllers::TerminalController());
     builder.addController(std::move(mc));
 
 //    builder.useSessionLogging(std::ofstream("../../log.txt"));
