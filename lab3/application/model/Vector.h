@@ -29,7 +29,7 @@ class Vector {
 public:
     Vector() = default;
 
-    constexpr explicit Vector(size_t length, const Alloc & allocator = std::allocator<T>()) : len(length) {
+    constexpr explicit Vector(size_t length, const Alloc & allocator = std::allocator<T>()) : len(length), alloc(allocator) {
         if (length > cap) {
             arr = AllocTraits::allocate(alloc, length);
             cap = length;
@@ -47,7 +47,15 @@ public:
             }
             throw;
         }
-        alloc = allocator;
+    };
+
+    constexpr Vector(std::initializer_list<T> && list, const Alloc & allocator = std::allocator<T>()) : alloc(allocator) {
+        arr = AllocTraits::allocate(alloc, list.size());
+        try {
+            uninitializedCopy(list.begin(), list.end(), arr);
+        } catch(...) {
+            AllocTraits::deallocate(alloc, arr, list.size());
+        }
     };
 
 //        constexpr ~Vector() {
@@ -131,7 +139,7 @@ private:
     template<class ForwardIt, class DestinationIt>
     DestinationIt uninitializedMove(ForwardIt begin, ForwardIt end, DestinationIt destinationIt) {
         ForwardIt it = begin;
-        ForwardIt current = destinationIt;
+        DestinationIt current = destinationIt;
         try {
             for (; it != end; ++it) {
                 AllocTraits::construct(alloc, current, std::move(*it));
@@ -150,16 +158,15 @@ private:
     template<class ForwardIt, class DestinationIt>
     DestinationIt uninitializedCopy(ForwardIt begin, ForwardIt end, DestinationIt destinationIt) {
         ForwardIt it = begin;
-        ForwardIt current = destinationIt;
+        DestinationIt current = destinationIt;
         try {
             for (; it != end; ++it) {
                 AllocTraits::construct(alloc, current, *it);
                 ++current;
             }
         } catch (...) {
-            for (ForwardIt jt = begin; jt != it; ++jt) {
-                AllocTraits::construct(alloc, begin, *jt);
-                ++begin;
+            for (ForwardIt jt = destinationIt; jt != current; ++jt) {
+                AllocTraits::destroy(alloc, jt);
             }
             throw;
         }
