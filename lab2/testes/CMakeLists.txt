@@ -4,7 +4,8 @@ project(testes)
 set(CMAKE_CXX_STANDARD 20)
 
 set(ASTROID ../application/model/Astroid.cpp)
-set(SOURCES ${ASTROID} test0.cpp catch.hpp)
+set(SOURCES ${ASTROID} test0.cpp)
+#include_directories(/usr/local/include/)
 
 add_executable(testes ${SOURCES})
 

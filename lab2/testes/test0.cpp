@@ -1,4 +1,5 @@
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
+//#include <catch2/catch_all.hpp>
 #include "catch.hpp"
 
 #include "../application/model/Astroid.h"
@@ -11,21 +12,21 @@ TEST_CASE( "Astroid coords are computed", "[astroid]" ) {
 
     SECTION("Astroid::x") {
         astroid.setR(24);
-        REQUIRE( astroid.x(0) == astroid.getR() );
-        REQUIRE( astroid.x(M_PI_2) == Approx(0).margin(0.1));
-        REQUIRE( astroid.x(M_PI) == -astroid.getR());
+        CHECK( astroid.x(0) == astroid.getR() );
+        CHECK( astroid.x(M_PI_2) == Approx(0).margin(0.1));
+        CHECK( astroid.x(M_PI) == -astroid.getR());
     }
 
     SECTION("Astroid::y") {
-        REQUIRE(astroid.y(0) == 0);
-        REQUIRE(astroid.y(M_PI_2) == astroid.getR());
-        REQUIRE(astroid.y(M_PI) == Approx(0).margin(0.1));
+        CHECK(astroid.y(0) == 0);
+        CHECK(astroid.y(M_PI_2) == astroid.getR());
+        CHECK(astroid.y(M_PI) == Approx(0).margin(0.1));
     }
 
     SECTION("Astroid::yx") {
-        REQUIRE(astroid.getYfromX(0) == Approx(0).margin(0.1));
-        REQUIRE(astroid.getYfromX(astroid.getR()) == 0);
-        REQUIRE(astroid.getYfromX(-astroid.getR()) == 0);
+        CHECK(astroid.getYfromX(0) == Approx(0).margin(0.1));
+        CHECK(astroid.getYfromX(astroid.getR()) == 0);
+        CHECK(astroid.getYfromX(-astroid.getR()) == 0);
     }
 }
 
@@ -34,21 +35,21 @@ TEST_CASE("Calculate properties", "[astroid]" ) {
     astroid.setR(12);
 
     SECTION("Astroid::cl") {
-        REQUIRE( astroid.curveLength(0) == 0 );
+        CHECK( astroid.curveLength(0) == 0 );
     }
 
     SECTION("Astroid::s") {
-        REQUIRE(astroid.square() == Approx(169.6).margin(0.1));
+        CHECK(astroid.square() == Approx(169.6).margin(0.1));
     }
 
     SECTION("Astroid::cr") {
-        REQUIRE( astroid.curvatureRadius(M_PI) == Approx(0).margin(0.1) );
+        CHECK( astroid.curvatureRadius(M_PI) == Approx(0).margin(0.1) );
     }
 
     SECTION("Astroid::cr") {
-        REQUIRE( astroid.curvatureRadius(0) == 0 );
+        CHECK( astroid.curvatureRadius(0) == 0 );
         astroid.setR(24);
-        REQUIRE( astroid.curvatureRadius(M_PI_4) == 36 );
+        CHECK( astroid.curvatureRadius(M_PI_4) == 36 );
     }
 }
 
