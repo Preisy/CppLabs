@@ -4,32 +4,35 @@
 #include "Entities/terminal/OutputTerminal.h"
 #include "Vector.h"
 
-class LogicalElement {
-    Vector<Models::InputTerminal> inputTerminals;
-    Vector<Models::OutputTerminal> outputTerminals;
+namespace Models {
 
-public:
-    LogicalElement();
+    class LogicalElement {
+        Vector<Models::InputTerminal> inputTerminals;
+        Vector<Models::OutputTerminal> outputTerminals;
 
-    LogicalElement(int inputLength, int outputLength);
+    public:
+        LogicalElement();
 
-    LogicalElement(Vector<Models::InputTerminal> && inputTerminals,
-                   Vector<Models::OutputTerminal> && outputTerminals);
+        LogicalElement(int inputLength, int outputLength);
 
-    Vector<Models::InputTerminal> & getInputTerminals();
+        LogicalElement(Vector<Models::InputTerminal> && inputTerminals,
+                       Vector<Models::OutputTerminal> && outputTerminals);
 
-    Vector<Models::OutputTerminal> & getOutputTerminals();
+        Vector<Models::InputTerminal> & getInputTerminals();
 
-    size_t getInputsLen();
+        Vector<Models::OutputTerminal> & getOutputTerminals();
 
-    size_t getOutputsLen();
+        size_t getInputsLen();
 
-    Models::InputTerminal & getInput(size_t index);
+        size_t getOutputsLen();
 
-    Models::OutputTerminal & getOutput(size_t index);
+        Models::InputTerminal & getInput(size_t index);
 
-    void addInputTerminal(const Models::InputTerminal & terminal);
+        Models::OutputTerminal & getOutput(size_t index);
 
-    void addOutputTerminal(const Models::OutputTerminal & terminal);
-};
+        void addInputTerminal(const Models::InputTerminal & terminal);
 
+        void addOutputTerminal(const Models::OutputTerminal & terminal);
+    };
+
+}

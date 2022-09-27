@@ -6,7 +6,7 @@
 namespace Controllers {
 
     class TerminalController : public IController {
-        LogicalElement logicalElement{2, 2};
+        Models::LogicalElement logicalElement{2, 2};
 
     public:
         TerminalController() = default;
