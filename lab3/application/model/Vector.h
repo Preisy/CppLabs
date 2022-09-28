@@ -144,12 +144,12 @@ private:
         DestinationIt current = destinationIt;
         try {
             for (; it != end; ++it) {
-                AllocTraits::construct(alloc, current, std::move(*it));
+                AllocTraits::construct(alloc, current, std::move_if_noexcept(*it));
                 ++current;
             }
         } catch (...) {
             for (ForwardIt jt = begin; jt != it; ++jt) {
-                AllocTraits::construct(alloc, begin, std::move(*jt));
+                AllocTraits::construct(alloc, begin, std::move_if_noexcept(*jt));
                 ++begin;
             }
             throw;
