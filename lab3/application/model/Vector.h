@@ -144,12 +144,12 @@ private:
         DestinationIt current = destinationIt;
         try {
             for (; it != end; ++it) {
-                AllocTraits::construct(alloc, current, std::move(*it));
+                AllocTraits::construct(alloc, current, std::move_if_noexcept(*it));
                 ++current;
             }
         } catch (...) {
             for (ForwardIt jt = begin; jt != it; ++jt) {
-                AllocTraits::construct(alloc, begin, std::move(*jt));
+                AllocTraits::construct(alloc, begin, std::move_if_noexcept(*jt));
                 ++begin;
             }
             throw;
@@ -194,7 +194,7 @@ public:
         }
     }
 
-    Vector<T, Alloc> operator=(const Vector<T, Alloc> & other) & {
+    Vector<T, Alloc>& operator=(const Vector<T, Alloc> & other) & {
         if (&other == this) return *this;
 
         for (int i = 0; i < len; ++i) {
@@ -222,7 +222,7 @@ public:
         return *this;
     }
 
-    Vector(Vector<T, Alloc> && other)
+    Vector(Vector<T, Alloc> && other) noexcept
         : len(other.len), cap(other.cap),
         arr(other.arr), alloc(std::move(other.alloc)) {
         other.len = 0;
@@ -231,7 +231,7 @@ public:
         other.arr = nullptr;
     }
 
-    Vector<T, Alloc> operator=(Vector<T, Alloc> && other) & {
+    Vector<T, Alloc>& operator=(Vector<T, Alloc> && other) & noexcept {
         if (&other == this) return *this;
 
         for (int i = 0; i < len; ++i) {
