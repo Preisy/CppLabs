@@ -23,5 +23,21 @@ namespace Models {
         os << "[" << typeStr << " " << terminal.signalState << ", " << terminal.numberOfConnections << "]";
         return os;
     }
+
+    int Terminal::operator||(const Terminal & el1) const {
+        if (signalState == 1 || el1.signalState == 1)
+            return 1;
+        if (signalState == 0 || el1.signalState == 0)
+            return 0;
+        return -1;
+    }
+
+    int Terminal::operator&&(const Terminal & el1) const {
+        if (signalState == 1 && el1.signalState == 1)
+            return 1;
+        if (signalState == -1 && el1.signalState == -1)
+            return -1;
+        return 0;
+    }
 }
 

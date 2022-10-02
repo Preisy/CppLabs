@@ -20,11 +20,15 @@ namespace Models {
 
         Vector<Models::InputTerminal> & getInputTerminals();
 
+        const Vector<Models::InputTerminal> & getInputTerminals() const;
+
         Vector<Models::OutputTerminal> & getOutputTerminals();
 
-        size_t getInputsLen();
+        const Vector<Models::OutputTerminal> & getOutputTerminals() const;
 
-        size_t getOutputsLen();
+        size_t getInputsLen() const;
+
+        size_t getOutputsLen() const;
 
         Models::InputTerminal & getInput(size_t index);
 
@@ -33,6 +37,10 @@ namespace Models {
         void addInputTerminal(const Models::InputTerminal & terminal);
 
         void addOutputTerminal(const Models::OutputTerminal & terminal);
+
+        friend std::ostream & operator<<(std::ostream & os, const LogicalElement & el);
     };
+
+    std::ostream & operator<<(std::ostream & os, const LogicalElement & el);
 
 }
