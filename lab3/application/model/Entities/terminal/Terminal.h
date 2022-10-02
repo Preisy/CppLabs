@@ -31,10 +31,13 @@ namespace Models {
         virtual ~Terminal() = default;
 
         friend std::ostream & operator<<(std::ostream & os, const Terminal & terminal);
+
+        int operator||(const Terminal & el1) const;
+
+        int operator&&(const Terminal & el1) const;
     };
 
     std::ostream & operator<<(std::ostream & os, const Terminal & terminal);
-
 
 }
 

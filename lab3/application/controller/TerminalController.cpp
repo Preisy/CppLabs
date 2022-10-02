@@ -80,16 +80,7 @@ namespace Controllers {
         if (!args.empty()) return {"", BadRequest};
 
         std::ostringstream ss;
-        ss << "Inputs:" << std::endl;
-        for (int i = 0; i < logicalElement.getInputsLen(); ++i) {
-            ss << i << ": " << logicalElement.getInputTerminals()[i] << " ";
-        }
-        ss << std::endl;
-
-        ss << "Outputs:" << std::endl;
-        for (int i = 0; i < logicalElement.getOutputsLen(); ++i) {
-            ss << i << ": " << logicalElement.getOutputTerminals()[i] << " ";
-        }
+        ss << logicalElement;
 
         return {std::move(ss.str()), Ok};
     }

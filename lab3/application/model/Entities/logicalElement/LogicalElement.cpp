@@ -22,12 +22,19 @@ namespace Models {
     Vector<Models::OutputTerminal> & LogicalElement::getOutputTerminals() {
         return outputTerminals;
     }
+    const Vector<Models::InputTerminal> & LogicalElement::getInputTerminals() const {
+        return inputTerminals;
+    }
 
-    size_t LogicalElement::getInputsLen() {
+    const Vector<Models::OutputTerminal> & LogicalElement::getOutputTerminals() const {
+        return outputTerminals;
+    }
+
+    size_t LogicalElement::getInputsLen() const {
         return inputTerminals.size();
     }
 
-    size_t LogicalElement::getOutputsLen() {
+    size_t LogicalElement::getOutputsLen() const {
         return outputTerminals.size();
     }
 
@@ -48,4 +55,17 @@ namespace Models {
     }
 
 
+    std::ostream & operator<<(std::ostream & os, const LogicalElement & el) {
+        os << "Inputs:" << std::endl;
+        for (int i = 0; i < el.getInputsLen(); ++i) {
+            os << i << ": " << el.getInputTerminals()[i] << " ";
+        }
+        os << std::endl;
+
+        os << "Outputs:" << std::endl;
+        for (int i = 0; i < el.getOutputsLen(); ++i) {
+            os << i << ": " << el.getOutputTerminals()[i] << " ";
+        }
+        return os;
+    }
 }
