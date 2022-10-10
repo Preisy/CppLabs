@@ -7,8 +7,6 @@ include_directories(model)
 include_directories(view)
 include_directories(controller)
 
-include_directories(../lib)
-
 include_directories(presentation)
 
 

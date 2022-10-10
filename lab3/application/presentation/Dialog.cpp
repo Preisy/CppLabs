@@ -45,30 +45,36 @@ int Dialog::run() {
 
 void Dialog::help() {
     std::cout << "Examples of commands:" << std::endl;
+	std::cout << "0.   help" << std::endl;
+	std::cout << "0.   exit" << std::endl;
     std::cout << "1.   setiarr signalState numberOfConnections ..." << std::endl;
     std::cout << "        Set new array of input terminals" << std::endl;
     std::cout << "        id, signalState and numberOfConnections must be positive integer " << std::endl;
-    std::cout << "1.   setoarr signalState numberOfConnections ..." << std::endl;
+    std::cout << "2.   setoarr signalState numberOfConnections ..." << std::endl;
     std::cout << "        Set new array of output terminals" << std::endl;
     std::cout << "        id, signalState and numberOfConnections must be positive integer " << std::endl;
-    std::cout << "1.   print" << std::endl;
+    std::cout << "3.   print" << std::endl;
     std::cout << "        print all terminals" << std::endl;
-    std::cout << "1.   t type id" << std::endl;
+    std::cout << "4.   t type id" << std::endl;
     std::cout << "        get Terminal by id" << std::endl;
     std::cout << "        type \"o\" means \"output\" " << std::endl;
     std::cout << "        type \"i\" means \"input\" " << std::endl;
     std::cout << "        id must be positive integer " << std::endl;
-    std::cout << "1.   t type id signalState numberOfConnections" << std::endl;
+    std::cout << "5.   t type id signalState numberOfConnections" << std::endl;
     std::cout << "        set Terminal by id" << std::endl;
     std::cout << "        type \"o\" means \"output\" " << std::endl;
     std::cout << "        type \"i\" means \"input\" " << std::endl;
     std::cout << "        id, signalState and numberOfConnections must be positive integer " << std::endl;
-    std::cout << "1.   addt signalState numberOfConnections" << std::endl;
+    std::cout << "6.   addt type signalState numberOfConnections" << std::endl;
     std::cout << "        add newTerminal" << std::endl;
     std::cout << "        type \"o\" means \"output\" " << std::endl;
     std::cout << "        type \"i\" means \"input\" " << std::endl;
 
     std::cout << std::endl;
+
+	std::cout << "Example commads: " << std::endl;
+	std::cout << "setiarr -1 1 1 0" << std::endl;
+	std::cout << "print" << std::endl;
 }
 
 
