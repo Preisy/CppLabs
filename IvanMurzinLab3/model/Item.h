@@ -1,20 +1,40 @@
 #pragma once
-#define SIZE 1000
 
+#include <tuple>
+
+template<class Key, class Head, class...Tail>
 class Item {
 private:
-    int key = 0;
-    char data[SIZE] = "";
+    Key key;
+
+    using Tuple = std::tuple<Head, Tail...>;
+    Tuple data;
 
 public:
-    Item() = default;
+    constexpr Item() = default;
+    constexpr ~Item() = default;
 
-    explicit Item(int key);
+//    template<class...Args,
+//            typename = std::enable_if_t<sizeof...(Args) == std::tuple_size_v<Tuple>>>
 
-    Item(int key, const char *data);
+//    template<class...Args>
 
-    int getKey() const;
+    template<class KKey, class...Args>
+    constexpr Item(KKey&& key, Args&&... names)
+        : key(std::forward<KKey>(key)), data(std::forward<Args>(names)...) {}
 
-    const char *getData() const;
+    int getSize() {
+        return std::tuple_size_v<Tuple>;
+    }
 
+    constexpr const Key & getKey() const {
+        return key;
+    }
+
+    template<std::size_t I,
+            typename = std::enable_if_t<I < std::tuple_size_v<Tuple>>>
+    constexpr typename std::tuple_element<I, Tuple>::type &
+    get() noexcept { // why noexcept
+        return std::get<I>(data);
+    }
 };
