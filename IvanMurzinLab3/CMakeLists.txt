@@ -9,7 +9,6 @@ include_directories(utils)
 add_subdirectory(builder)
 add_subdirectory(application)
 
-add_executable(test test.cpp)
 add_executable(main main.cpp)
 
 
