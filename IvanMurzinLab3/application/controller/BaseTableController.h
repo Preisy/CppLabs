@@ -9,7 +9,7 @@
 namespace Controllers {
 
     template<class Key, class Head, class...Tail>
-    class TableController : public IController {
+    class BaseTableController : public IController {
         Models::Table<Key, Head, Tail...> table;
 
     protected:
@@ -55,12 +55,12 @@ namespace Controllers {
         }
 
     public:
-        TableController() = default;
+        BaseTableController() = default;
 
 
-        ~TableController() override = default;
+        ~BaseTableController() override = default;
 
-        TableController(TableController && matrixController) noexcept {
+        BaseTableController(BaseTableController && matrixController) noexcept {
             table = std::move(matrixController.table);
         }
 

@@ -1,9 +1,9 @@
 #pragma once
-#include "TableController.h"
+#include "BaseTableController.h"
 
 namespace Controllers {
 
-    class MarksController : public TableController<int, double> {
+    class MarksController : public BaseTableController<int, double> {
         std::unordered_map<std::string, std::function<Response(const std::string &)>> getRequests() override {
             std::unordered_map<std::string, std::function<Response(const std::string &)>> res;
             res.emplace("addm", [this](const std::string & args) { return add(args);} );
