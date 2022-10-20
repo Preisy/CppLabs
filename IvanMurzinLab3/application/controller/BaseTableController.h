@@ -13,20 +13,83 @@ namespace Controllers {
         Models::Table<Key, Head, Tail...> table;
 
     protected:
-        Response add(const std::string & args) {
+        Response get(const std::string & args) {
+            std::istringstream is(args);
+
+            std::tuple<Key> t;
+            try {
+                t = TupleDeserializer<Key>::deserialize(is);
+            } catch (std::exception & e) {
+                return {e.what(), InternalServerError};
+            }
+            if (!is || !is.eof()) {
+                return {"Unknown parameter pack", BadRequest};
+            }
+
+            auto resource = table.getItem(std::get<0>(t));
+
+            if (resource.hasData())
+                return {
+                    TupleDeserializer<Key, Head, Tail...>::serialize(resource.getData())
+                , Ok};
+            else
+                return {"Not Found", NotFound};
+        }
+
+        Response post(const std::string & args) {
             std::istringstream is(args);
 
             std::tuple<Key, Head, Tail...> t;
             try {
                 t = TupleDeserializer<Key, Head, Tail...>::deserialize(is);
-            } catch (std::invalid_argument & e) {
-                return {e.what(), BadRequest};
             } catch (std::exception & e) {
                 return {e.what(), InternalServerError};
             }
-            table.add(std::move(t));
+            if (!is || !is.eof()) {
+                return {"Unknown parameter pack", BadRequest};
+            }
 
-            return {"", Ok};
+            if (table.add(std::move(t)))
+                return {"", Ok};
+            else
+                return {"Already in", Ok};
+        }
+
+        Response put(const std::string & args) {
+            std::istringstream is(args);
+
+            std::tuple<Key, Head, Tail...> t;
+            try {
+                t = TupleDeserializer<Key, Head, Tail...>::deserialize(is);
+            } catch (std::exception & e) {
+                return {e.what(), InternalServerError};
+            }
+            if (!is || !is.eof()) {
+                return {"Unknown parameter pack", BadRequest};
+            }
+
+            if (table.update(std::move(t)))
+                return {"", Ok};
+            else
+                return {"Not Found", Ok};
+        }
+
+        Response del(const std::string & args) {
+            std::istringstream is(args);
+
+            std::tuple<Key> t;
+            try {
+                t = TupleDeserializer<Key>::deserialize(is);
+            } catch (std::exception & e) {
+                return {e.what(), InternalServerError};
+            }
+            if (!is || !is.eof()) {
+                return {"Unknown parameter pack", BadRequest};
+            }
+            if (table.remove(std::get<0>(t)))
+                return {"", Ok};
+            else
+                return {"Not Found", NotFound};
         }
 
     private:
@@ -45,10 +108,8 @@ namespace Controllers {
             std::ostringstream os(args);
 
             for(auto & it : table) {
-                applyTuple([&os, this](const Key & key, const Head & head, const Tail & ... tail){
-                    printArgs(os, key, head, tail...);
-                }, it);
-                os << '\n';
+                os << TupleDeserializer<Key, Head, Tail...>::serialize(it);
+                os << std::endl;
             }
 
             return {os.str(), Ok};
