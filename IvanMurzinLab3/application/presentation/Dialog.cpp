@@ -10,7 +10,7 @@ void Dialog::connectToApi(Builder* builder) {
 
 int Dialog::run() {
     if (api == nullptr) return 1;
-    out << "Type your command or type help" << std::endl;
+    out << "Type your command" << std::endl;
 
     while (true) {
         out << "\033[34m>>> \033[36m";
@@ -23,7 +23,7 @@ int Dialog::run() {
         out << "\033[0m";
 
         if (command == "exit") return 0;
-        if (command == "help") {
+        else if (command == "help") {
             help();
             continue;
         }
@@ -32,6 +32,8 @@ int Dialog::run() {
         if (response.getResponseCode() == Ok) {
             if (!response.getResponse().empty())
                 out << response.getResponse() << std::endl;
+        } else if (!response.getResponse().empty()) {
+            out << response.getResponse() << std::endl;
         } else {
             out << "Bad Request" << std::endl;
         }
@@ -43,11 +45,11 @@ void Dialog::help() {
     out << "Examples of commands:" << std::endl;
     out << "0. help" << std::endl;
     out << "0. exit" << std::endl;
-    out << "1. add i j value" << std::endl;
-    out << "   adding value by index" << std::endl;
-    out << "2. mk" << std::endl;
-    out << "   make vector" << std::endl;
-    out << "3. print" << std::endl;
+    out << "1. get_ key" << std::endl;
+    out << "2. post_ key args..." << std::endl;
+    out << "3. put_ key args..." << std::endl;
+    out << "4. del_ key" << std::endl;
+    out << "5. print_" << std::endl;
     out << std::endl;
 }
 

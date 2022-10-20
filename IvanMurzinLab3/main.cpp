@@ -16,17 +16,6 @@
 // table.add(std::move(t1));
 
 
-void foo(std::tuple<int, char> && t) {
-    std::cout << "&&" << std::endl;
-}
-void foo(const std::tuple<int, char> & t) {
-    std::cout << "const &" << std::endl;
-}
-
-class A {
-
-};
-
 int main() {
 //    Models::Table<int, char> table;
 //
@@ -45,14 +34,11 @@ int main() {
 //    table.add(std::move(t1));
 //
 //
-////    table.add(t1);
+////    table.post(t1);
 //
 //    for (auto & it : table)
 //        std::cout << std::get<0>(it) << " " << std::get<1>(it) << std::endl;
 
-    A* a = reinterpret_cast<A*>(new uint8_t[2 * sizeof(A)]);
-    a->~A();
-    ::new (a) A();
 
 
 

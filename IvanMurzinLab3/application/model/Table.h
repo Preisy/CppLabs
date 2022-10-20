@@ -113,14 +113,14 @@ public:
 
     bool update(const Item &item) {
         Item *result = std::lower_bound(data, data + size, std::get<0>(item), [](const Item &current, const Key & key) { return std::get<0>(current) < key; });
-        if (result == data + size || std::get<0>(result) != std::get<0>(item)) return false;
+        if (result == data + size || std::get<0>(*result) != std::get<0>(item)) return false;
         *result = item;
         return true;
     }
 
     bool update(Item &&item) {
         Item *result = std::lower_bound(data, data + size, std::get<0>(item), [](const Item &current, const Key & key) { return std::get<0>(current) < key; });
-        if (result == data + size || std::get<0>(result) != std::get<0>(item)) return false;
+        if (result == data + size || std::get<0>(*result) != std::get<0>(item)) return false;
         *result = std::move(item);
         return true;
     }
